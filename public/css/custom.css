@@ -1,0 +1,72 @@
+/* public/css/custom.css */
+
+/* General body styling */
+body {
+    background-color: #f8f9fa;
+}
+
+/* Sidebar styling */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #c82333;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Centering logo in the sidebar */
+.sidebar-logo {
+    width: 80px; /* Adjust size as needed */
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* Sidebar links styling */
+.sidebar a {
+    text-decoration: none;
+    display: block;
+    padding: 15px;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    text-align: left;
+}
+
+.sidebar a:hover {
+    background-color: #c82333;
+}
+
+.sidebar-icon {
+    width: 24px; /* Adjust size as needed */
+    height: 24px;
+    margin-right: 10px; /* Space between icon and text */
+}
+/* Header styling */
+.header {
+    padding: 15px;
+    background-color: #6c757d;
+    color: white;
+    text-align: center;
+    margin-left: 250px;
+}
+
+/* Main content container */
+.container-content {
+    margin-left: 250px;
+    padding: 30px;
+    position: relative;
+    background-color: #ffffff; /* Optional: To ensure text readability */
+}
+
+/* Footer styling */
+.footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #f8f9fa;
+    margin-top: 30px;
+}
