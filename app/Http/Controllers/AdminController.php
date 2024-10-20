@@ -103,13 +103,37 @@ class AdminController extends Controller
         return redirect()->back()->with('error', 'Doctor not found.');
     }
 
-    public function update_doctor($id){        
-        $doctor = Doctor::where('user_id',$id)->first();
-        $user = User::where('id',$id)->first();
-        return view('editdoctor',compact('doctor'));
+    public function update_doctor($id)
+    {
+        $doctor = Doctor::where('user_id', $id)->first();
+        $user = User::where('id', $id)->first();
+        return view('editdoctor', compact('doctor'));
     }
 
-    public function save_doctor_update($id){
-        dd($id);
+    public function save_doctor_update(Request $request, $id)
+    {
+        // Fetch the doctor record based on user_id (since doctor table is associated with user)
+        $doctor = Doctor::where('user_id', $id)->firstOrFail();
+
+        // Fetch the corresponding user record
+        $user = User::findOrFail($id);
+        // Update the user's name and email
+        $user->name = $request->doctor_name;
+        $user->email = $request->email;
+        // dd($doctor, $user);
+        $user->save();
+
+        // Update the doctor record
+        $doctor->nic = $request->nic;
+        $doctor->address = $request->address;
+        $doctor->phone = $request->phone;
+        $doctor->work_place = $request->work_place;
+        $doctor->specialization = $request->specialization;
+        $doctor->experience = $request->experience;
+        $doctor->highest_edu = $request->highest_edu;
+        $doctor->save();
+
+        // Redirect back to the dashboard or another page
+        return redirect()->route('dashboard')->with('success', 'Doctor details updated successfully.');
     }
 }

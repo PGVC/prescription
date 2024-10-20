@@ -8,7 +8,7 @@
         </div>
         <div class="card-body">
             <!-- Assuming the form posts to a route like update_doctor -->
-            <form action="{{ route('save_doctor_update',$doctor->id) }}" method="POST">
+            <form action="{{ route('save_doctor_update',$doctor->user->id) }}" method="POST">
                 @csrf
                 @method('PUT') <!-- Method spoofing for PUT request -->
 
