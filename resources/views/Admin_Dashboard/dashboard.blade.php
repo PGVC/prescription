@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <style>
-    .modal-close{
+    .modal-close {
         filter: invert(1);
     }
 </style>
@@ -36,44 +36,75 @@
         </div>
     </div>
 
+    @if(session('success'))
+    <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    @if(session('error'))
+    <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
+
     <!-- Table Section -->
     <div class="table-responsive">
+        <!-- Pagination Links (if needed at the top) -->
+        <div class="d-flex justify-content-end mb-2">
+            {{ $doctors->links('pagination::bootstrap-5') }}
+        </div>
+
+        <!-- Check if doctors collection is empty -->
+        @if($doctors->isEmpty())
+        <label class="d-flex justify-content-center">Doctors not found.</label>
+        @else
         <table class="table table-bordered table-striped">
             <thead class="bg-secondary">
                 <tr>
                     <th>DID</th>
                     <th>Doctor Name</th>
                     <th>NIC</th>
-                    <th>Doctor Age</th>
+                    <th>Address</th>
                     <th>Contact No</th>
-                    <th>Bussiness Location</th>
-                    <th>Location ID</th>
+                    <th>Email</th>
+                    <th>Work Place</th>
+                    <th>Specialization</th>
+                    <th>Experience</th>
+                    <th>Highest Education</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @for ($i = 1; $i <= 10; $i++)
-                    <tr style="cursor: pointer;" onclick="window.location.href='/viewpatient';">
-                    <td>{{ $i }}</td>
-                    <td>Doctor Name</td>
-                    <td>70824567V</td>
-                    <td>54</td>
-                    <td>+94123456789</td>
-                    <td>Anuradhapura</td>
-                    <td>A001</td>
-                    <td></td>
+                @foreach ($doctors as $doctor)
+                <tr>
+                    <td>{{ $doctor->id }}</td>
+                    <td>{{ $doctor->user->name ?? 'N/A' }}</td> <!-- Safely accessing user name -->
+                    <td>{{ $doctor->nic }}</td>
+                    <td>{{ $doctor->address }}</td>
+                    <td>{{ $doctor->phone }}</td>
+                    <td>{{ $doctor->user->email ?? 'N/A' }}</td> <!-- Safely accessing user email -->
+                    <td>{{ $doctor->work_place }}</td>
+                    <td>{{ $doctor->specialization }}</td>
+                    <td>{{ $doctor->experience }}</td>
+                    <td>{{ $doctor->highest_edu }}</td>
                     <td>
-                        <select class="form-select form-select-sm bg-secondary text-white border-danger" style="width: auto; height: 37px;" onchange="handleAction(event, {{ $i }})" onclick="event.stopPropagation();">
-                            <option disabled selected>Actions</option> <!-- Non-selectable label -->
-                            <option value="edit">Edit</option>
-                            <option value="delete">Delete</option>
-                        </select>
+                        <!-- Action buttons -->
+                        <a href="{{ route('update_doctor', $doctor->user->id) }}" class="btn"><i class="fas fa-edit text-primary"></i></a>
+                        <form action="{{ route('delete_doctor', $doctor->user->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn"><i class="fas fa-trash text-danger"></i></button>
+                        </form>
                     </td>
-                    </tr>
-                    @endfor
+                </tr>
+                @endforeach
             </tbody>
         </table>
+        @endif
+
+        <!-- Pagination Links (at the bottom) -->
+        <div class="d-flex justify-content-end mt-2">
+            {{ $doctors->links('pagination::bootstrap-5') }}
+        </div>
     </div>
+
 </div>
 
 <!-- Modal for Adding Patient -->
@@ -93,7 +124,7 @@
                     </div>
                     <div class="col mb-3">
                         <label for="nic">NIC: <span class="text-danger bg-transparent">*</span></label>
-                        <input type="text" id="nic" class="form-control" name="nic" placeholder="NIC" required>
+                        <input type="text" id="nic" class="form-control" name="nic" placeholder="NIC" maxlength="12" required>
                     </div>
                     <div class="col mb-3">
                         <label for="address">Address: <span class="text-danger bg-transparent">*</span></label>
@@ -101,7 +132,7 @@
                     </div>
                     <div class="col mb-3">
                         <label for="phone">Contact No: <span class="text-danger bg-transparent">*</span></label>
-                        <input type="tel" id="phone" class="form-control" name="phone" placeholder="07XXXXXXXX" required>
+                        <input type="tel" id="phone" class="form-control" name="phone" placeholder="07XXXXXXXX" maxlength="12" required>
                     </div>
                     <div class="col mb-3">
                         <label for="email">Email: <span class="text-danger bg-transparent">*</span></label>
@@ -125,7 +156,7 @@
                     </div>
                     <div class="form-group mt-3">
                         <button type="submit" class="btn btn-success">Save</button>
-                        <button type="rest" class="btn btn-warning">Clear</button>                        
+                        <button type="rest" class="btn btn-warning">Clear</button>
                     </div>
                 </form>
             </div>
