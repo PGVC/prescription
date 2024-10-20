@@ -92,7 +92,8 @@
                 <h5 class="modal-title" style="color: white" id="addBookingModalLabel">Add Booking</h5>
             </div>
             <div class="modal-body">
-                <form method="GET" action="/bookings/save" class="p-3 border rounded">
+                <form action="{{route('bookings.store')}}" method="POST"  class="p-3 border rounded">
+                    @csrf
 
                 
                     <div class="form-row mb-3">

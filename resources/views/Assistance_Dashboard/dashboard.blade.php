@@ -97,19 +97,20 @@
                     <h5 class="modal-title" style="color: white" id="addBookingModalLabel">Add Booking</h5>
                 </div>
                 <div class="modal-body">
-                    <form method="GET" action="/bookings/save" class="p-3 border rounded">
+                    <form method="POST" action="{{ route('bookings.store')}}" class="p-3 border rounded">
+                        @csrf
                         <div class="form-row mb-3">
                             <div class="col">
                                 <label for="name">Patient Name:*</label>
-                                <input type="text" id="name" class="form-control" name="contact_num" required>
+                                <input type="text" id="name" class="form-control" name="patientname" required>
                             </div>
                             <div class="col">
                                 <label for="contactnum">Contact Number:*</label>
-                                <input type="text" id="contactnum" class="form-control" name="contact_num" required>
+                                <input type="tel" id="contactnum" class="form-control" name="contact_num" required>
                             </div>
                             <div class="col">
                                 <label for="Age">Age:*</label>
-                                <input type="text" id="Age" class="form-control" name="contact_num" required>
+                                <input type="text" id="Age" class="form-control" name="age" required>
                             </div>
                             <div class="col">
                                 <label for="bookingdate">Date:*</label>

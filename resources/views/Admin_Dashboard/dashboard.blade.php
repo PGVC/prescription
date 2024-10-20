@@ -80,7 +80,8 @@
                 <h5 class="modal-title" id="addPatientModalLabel" style="color: white">Add Patient</h5>
             </div>
             <div class="modal-body">
-                <form method="GET" action="/patients/save" class="p-3 border rounded">
+                <form method="get" action="/patients/save" class="p-3 border rounded">
+                   @csrf
                     <div class="col">
                         <label for="patientId">Doctor ID:</label>
                         <input type="text" id="doctorId" class="form-control" name="doctor_id" placeholder="Leave empty to autogenerate">

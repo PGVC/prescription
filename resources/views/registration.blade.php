@@ -104,6 +104,7 @@
                             <label for="password">Password:</label>
                             <input type="password" name="password" class="form-control">
                         </div>
+                        <p>Alrady have accound?<a href="{{ route ('login') }}" class="text-light m-2"> Login</a></p>
                         <button type="submit" class="btn btn-danger w-100">Register</button>
                     </form>
                 </div>
@@ -113,3 +114,5 @@
 </body>
 
 </html>
+
+
