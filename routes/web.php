@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AddBookingController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
@@ -75,6 +76,7 @@ Route::middleware('auth')->group(function () {
     // Route for submitting the booking form
     Route::post('bookings', [AddBookingController::class, 'store'])->name('bookings.store');
     
+    Route::post('/add-doctor',[AdminController::class, 'add_doctor'])->name('add_doctor');
     
 
 
