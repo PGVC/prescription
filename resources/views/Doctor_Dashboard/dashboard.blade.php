@@ -144,11 +144,7 @@
                     <h5 class="modal-title" id="addPatientModalLabel" style="color: white">Add Patient</h5>
                 </div>
                 <div class="modal-body">
-                    <form method="GET" action="/patients/save" class="p-3 border rounded">
-                        <div class="col">
-                            <label for="patientId">Patient ID:</label>
-                            <input type="text" id="patientId" class="form-control" name="patient_id" placeholder="Leave empty to autogenerate">
-                        </div>
+                    <form method="GET" action="/patients/save" class="p-3 border rounded">                        
                         <div class="col">
                             <label for="patientName">Patient Name:*</label>
                             <input type="text" id="patientName" class="form-control" name="patient_name" required>
