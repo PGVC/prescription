@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AddBookingController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
@@ -12,9 +13,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/dashboard', function () {
-    return view('Admin_Dashboard.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [AdminController::class, 'show_doctors'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -75,6 +74,11 @@ Route::middleware('auth')->group(function () {
     // Route for submitting the booking form
     Route::post('bookings', [AddBookingController::class, 'store'])->name('bookings.store');
     
+    Route::post('/add-doctor',[AdminController::class, 'add_doctor'])->name('add_doctor');
+    Route::delete('/delete-doctor/{id}',[AdminController::class, 'delete_doctor'])->name('delete_doctor');
+
+    Route::get('doctor/edit/{id}',[AdminController::class, 'update_doctor'])->name('update_doctor');
+    Route::put('doctor/edit/{id}',[AdminController::class, 'save_doctor_update'])->name('save_doctor_update');
     
 
 
