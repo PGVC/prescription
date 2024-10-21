@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AddBookingController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MailController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
@@ -14,6 +15,7 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/dashboard', [AdminController::class, 'show_doctors'])->name('dashboard');
+Route::get('/logout',[AdminController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -79,6 +81,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('doctor/edit/{id}',[AdminController::class, 'update_doctor'])->name('update_doctor');
     Route::put('doctor/edit/{id}',[AdminController::class, 'save_doctor_update'])->name('save_doctor_update');
+
+    // routes for send mail
+    Route::get('/welcome-mail/{username}/{mail}/{psw}',[MailController::class, 'welcome_mail'])->name('welcome_mail');
     
 
 

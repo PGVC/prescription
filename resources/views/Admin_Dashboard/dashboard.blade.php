@@ -44,6 +44,8 @@
     <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
 
+    <p class="tetx-secondary fs-4">{{ $totalDoctorCount }} Doctors</p>
+
     <!-- Table Section -->
     <div class="table-responsive">
         <!-- Pagination Links (if needed at the top) -->
@@ -58,7 +60,6 @@
         <table class="table table-bordered table-striped">
             <thead class="bg-secondary">
                 <tr>
-                    <th>DID</th>
                     <th>Doctor Name</th>
                     <th>NIC</th>
                     <th>Address</th>
@@ -74,7 +75,6 @@
             <tbody>
                 @foreach ($doctors as $doctor)
                 <tr>
-                    <td>{{ $doctor->id }}</td>
                     <td>{{ $doctor->user->name ?? 'N/A' }}</td> <!-- Safely accessing user name -->
                     <td>{{ $doctor->nic }}</td>
                     <td>{{ $doctor->address }}</td>
@@ -156,7 +156,7 @@
                     </div>
                     <div class="form-group mt-3">
                         <button type="submit" class="btn btn-success">Save</button>
-                        <button type="rest" class="btn btn-warning">Clear</button>
+                        <button type="reset" class="btn btn-warning">Clear</button>
                     </div>
                 </form>
             </div>

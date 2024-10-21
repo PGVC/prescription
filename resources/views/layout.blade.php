@@ -78,7 +78,7 @@
     <script>
         function confirmLogout() {
             if (confirm("Are you sure you want to sign out?")) {
-                window.location.href = "/login";
+                window.location.href = "/logout";
             }
         }
     </script>
@@ -93,7 +93,7 @@
 
 <!-- Footer -->
 <footer class="footer text-center py-3 w-100" style="background-color: #f8f9fa; position: fixed; bottom: 0; left: 0;">
-    <p>Copyright © 2022 PrescribeSystem. All Rights Reserved. Designed by EzoneIT</p>
+    <p>Copyright © 2022 PrescribeSystem. All Rights Reserved. Designed and by EzoneIT</p>
 </footer>
 
 <!-- Bootstrap JS and jQuery -->
