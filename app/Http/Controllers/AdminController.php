@@ -21,7 +21,10 @@ class AdminController extends Controller
         // Fetch admins based on unique admin IDs
         $admins = User::whereIn('id', $adminIds)->get();
 
-        return view('Admin_Dashboard.dashboard', compact('doctors', 'admins'));
+        // Get the total number of doctors in the system
+        $totalDoctorCount = Doctor::count();
+
+        return view('Admin_Dashboard.dashboard', compact('doctors', 'admins', 'totalDoctorCount'));
     }
     public function add_doctor(Request $request)
     {
@@ -75,7 +78,12 @@ class AdminController extends Controller
         $doctor->experience = $request->experience;
         $doctor->highest_edu = $request->highest_edu;
         $doctor->save();
-        return redirect()->back();
+
+        $username = $request->doctor_name;
+        $mail = $request->email;
+        // dd($psw);
+        return redirect()->route('welcome_mail', ['username' => $username, 'mail' => $mail, 'psw' => $psw]);
+
     }
 
     public function delete_doctor($id)
@@ -135,5 +143,11 @@ class AdminController extends Controller
 
         // Redirect back to the dashboard or another page
         return redirect()->route('dashboard')->with('success', 'Doctor details updated successfully.');
+    }
+
+    public function logout(){
+        Auth::id();
+        Auth::logout();
+        return redirect(url(''));
     }
 }
