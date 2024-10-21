@@ -78,7 +78,7 @@
     <script>
         function confirmLogout() {
             if (confirm("Are you sure you want to sign out?")) {
-                window.location.href = "/login";
+                window.location.href = "/logout";
             }
         }
     </script>
